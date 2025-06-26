@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: jiraData
+    database:  DATAOPS_MPHASIS_PROD
+    schema: ingestion
+    tables:
+    - name: JIRA_ISSUE
+    - name: TEMPO_WORKLOG

@@ -12,5 +12,5 @@ select
     parse_json(fields):customfield_10202:value::string as leaveReason,
     parse_json(fields):status:name::string as emplyeeStatus
 
-from DATAOPS_MPHASIS_PROD.INGESTION.JIRA_ISSUE
+from {{source("jiraData",'JIRA_ISSUE') }}
 where key like 'MDLXINTPT%' and issueType like 'Employee'

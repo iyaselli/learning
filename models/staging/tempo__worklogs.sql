@@ -5,4 +5,4 @@ select
     parse_json(author):accountId::string as jiraAccountID,
     parse_json(issue):id::number as IssueID
 
-from DATAOPS_MPHASIS_PROD.INGESTION.TEMPO_WORKLOG
+from {{ source("jiraData", "TEMPO_WORKLOG") }}
