@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: tempo__worklogs
+    columns:
+      - name: worklogId
+        tests:
+          - unique
+          - not_null
+  - name: peopleTraker__employees
+    columns:
+      - name: issueId
+        tests:
+          - unique
+          - not_null
