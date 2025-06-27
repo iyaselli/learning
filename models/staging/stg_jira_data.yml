@@ -2,14 +2,18 @@ version: 2
 
 models:
   - name: tempo__worklogs
+    description: one unique worklog per row. Each row refers to a single unit of time, for a single user, to a single work item.
     columns:
       - name: worklogId
+        description: worklogID is primary key.
         tests:
           - unique
           - not_null
   - name: peopleTraker__employees
+    description: this is the jira project containing employees. there should be a single record per employee
     columns:
       - name: issueId
+        description: issueId is the primary key
         tests:
           - unique
           - not_null
