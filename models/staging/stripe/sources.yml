@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: stripe
+    database: IY_TEST_DBT
+    schema: JAFFLE_SHOP_RAW
+    tables:
+      - name: payments
+ 
