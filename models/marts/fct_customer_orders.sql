@@ -1,3 +1,11 @@
+{{
+    config(
+        materialized='incremental',
+        unique_key='order_id',
+        incremental_strategy='merge'
+    )
+}}
+
 with
 
 customers as ( select * from {{ ref('stg_jaffle_shop__customers') }}),
@@ -53,3 +61,9 @@ final as (
     )
 
 select * from final
+
+
+{% if is_incremental() %}
+    -- this filter will only be applied on an incremental run
+    where order_placed_at > (select max(order_placed_at) from {{ this }}) 
+{% endif %}
