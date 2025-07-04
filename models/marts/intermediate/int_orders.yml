@@ -1,2 +1,21 @@
 models:
   - name: int_orders
+    columns:
+    - name: order_id
+      tests:
+        - unique
+        - not_null
+
+    - name: customer_id
+      tests:
+        - relationships:
+            to: ref('stg_customers')
+            field: customer_id
+    
+    - name: location_id
+      tests:
+        - relationships:
+            to: ref('stg_locations')
+            field: location_id
+        
+    
