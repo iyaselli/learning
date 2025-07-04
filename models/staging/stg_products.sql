@@ -1,5 +1,5 @@
 with
-
+-- this is a comment added for CI testing
 source as (
 
     select * from {{ source('jaffle_shop', 'products') }}
