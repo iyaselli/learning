@@ -1,0 +1,99 @@
+models:
+  - name: fct_orders
+    group: finance
+    access: public
+    latest_version: 1
+    config: 
+      contract:
+        enforced: true
+    tests:
+      - dbt_utils.expression_is_true:
+          expression: "order_total >5"
+          config:
+            severity: warn
+
+    columns:
+      - name: order_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+        tests:
+          - unique
+          - not_null
+
+      - name: location_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: customer_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: order_total 
+        data_type: number
+        constraint:
+          - type: not_null
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 5
+              row_condition: "order_id is not null"
+              strictly: true
+              config:
+                severity: warn
+
+      - name: tax_paid 
+        data_type: number
+        constraint:
+          - type: not_null
+
+      - name: customer_name 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: location_name 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: tax_rate 
+        data_type: int
+        constraint:
+          - type: not_null 
+
+      - name: ordered_month 
+        data_type: int
+        constraint:
+          - type: not_null
+
+      - name: ordered_day 
+        data_type: int
+        constraint:
+          - type: not_null
+
+      - name: ordered_year
+        data_type: int
+        constraint:
+          - type: not_null  
+
+      - name: location_opened_at 
+        data_type: timestamp_ntz
+        constraint:
+          - type: not_null
+
+      - name: ordered_at
+        data_type: timestamp_ntz
+        constraint:
+          - type: not_null
+      
+    versions:
+      - v: 1
+        config:
+          alias: fct_orders
+      - v: 2
+        columns:
+            
+          - include: all
+

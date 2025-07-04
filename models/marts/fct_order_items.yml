@@ -1,0 +1,74 @@
+models:
+  - name: fct_order_items
+    config:
+        contract:
+            enforced: true
+    columns:
+      - name: order_item_id
+        data_type: varchar
+        constraint:
+          - type: not_null
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+        tests:
+          - relationships:
+              to: ref('stg_order_items')
+              field: order_id
+
+      - name: product_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: location_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: customer_id 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: order_total 
+        data_type: number
+        constraint:
+          - type: not_null
+
+      - name: tax_paid 
+        data_type: number
+        constraint:
+          - type: not_null
+
+      - name: tax_rate 
+        data_type: number
+        constraint:
+          - type: not_null 
+
+      - name: location_name 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: customer_name 
+        data_type: varchar
+        constraint:
+          - type: not_null
+
+      - name: location_opened_at 
+        data_type: timestamp_ntz
+        constraint:
+          - type: not_null  
+
+      - name: ordered_at 
+        data_type: timestamp_ntz
+        constraint:
+          - type: not_null  
+
+
